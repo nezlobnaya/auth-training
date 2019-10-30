@@ -39,10 +39,14 @@ export default withFormik ({
         password: Yup.string()
         .min(6).required()
     }),
-    handleSubmit(values) {
+    handleSubmit(values, formikBag) {
+        console.log(formikBag.props)
         const url = 'https://mock-users-server.herokuapp.com/api/auth'
         axios.post(url, values)
-        .then(console.log)
+        .then(res => {
+            localStorage.setItem('token', res.data.token)
+            formikBag.props.history.push('/profile')
+        })
         .catch(e => {
             console.log(e.response.data)
         })
