@@ -1,9 +1,16 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom'
 import { withFormik, Form, Field, yupToFormErrors } from 'formik'
 import * as Yup from 'yup'
 import axios from 'axios';
 
 const Login = ({ touched, errors }) => {
+    const token = localStorage.getItem('token')
+        if(token) {
+          return <Redirect to='/profile' />
+        }
+       
+    
     return ( 
         <Form className='form-group'>
             <div className='form'>

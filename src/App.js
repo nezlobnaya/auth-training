@@ -7,6 +7,7 @@ import './App.css';
 
 
 function App() {
+  const token = localStorage.getItem('token')
   return (
     <div className="App" style={{ padding: 30 }}>
       <div>
