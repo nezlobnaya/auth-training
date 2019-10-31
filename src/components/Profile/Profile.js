@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router';
 import axios from 'axios'
+import { axiosWithAuth } from '../../utils/axiosWithAuth'
 
 const Profile = ({ history }) => {
     
@@ -10,9 +11,10 @@ const Profile = ({ history }) => {
 
     useEffect(() => {
         const token = localStorage.getItem('token')
-        const url = 'https://mock-users-server.herokuapp.com/api/protected'
+        // const url = 'https://mock-users-server.herokuapp.com/api/protected'
         if(token) {
-            axios.get(url, {
+            axiosWithAuth()
+            .get('/protected', {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
