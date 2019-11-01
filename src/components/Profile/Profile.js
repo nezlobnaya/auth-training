@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { withRouter } from 'react-router';
-import axios from 'axios'
+// import { withRouter } from 'react-router';
+// import axios from 'axios'
 import { axiosWithAuth } from '../../utils/axiosWithAuth'
 
 const Profile = ({ history }) => {
@@ -10,13 +10,13 @@ const Profile = ({ history }) => {
     const[message, setMessage] = useState('')
 
     useEffect(() => {
-        const token = localStorage.getItem('token')
+        // const token = localStorage.getItem('token')
         // const url = 'https://mock-users-server.herokuapp.com/api/protected'
-        if(token) {
+        // if(token) {
             axiosWithAuth()
             .get('/protected', {
                 headers: {
-                    Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
             }).then (res => {
                 console.log(res)
@@ -29,7 +29,7 @@ const Profile = ({ history }) => {
                 history.push('/')
             })
         }
-    }, [history])
+    , [history])
 
 
     return ( 
@@ -44,4 +44,4 @@ const Profile = ({ history }) => {
      );
 }
  
-export default withRouter(Profile);
+export default Profile;

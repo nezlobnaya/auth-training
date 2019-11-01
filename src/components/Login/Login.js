@@ -1,14 +1,14 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom'
+// import { Redirect } from 'react-router-dom'
 import { withFormik, Form, Field } from 'formik'
 import * as Yup from 'yup'
 import { axiosWithAuth } from '../../utils/axiosWithAuth'
 
 const Login = ({ touched, errors }) => {
-    const token = localStorage.getItem('token')
-        if(token) {
-          return <Redirect to='/profile' />
-        }
+    // const token = localStorage.getItem('token')
+    //     if(token) {
+    //       return <Redirect to='/profile' />
+    //     }
        
     
     return ( 
@@ -56,7 +56,7 @@ export default withFormik ({
             formikBag.props.history.push('/profile')
         })
         .catch(e => {
-            console.log(e.response.data)
+            console.log(e.response.data.message)
         })
     }
 }) (Login);

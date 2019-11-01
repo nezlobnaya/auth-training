@@ -1,26 +1,26 @@
 import React from 'react';
-import { Route, Link, Switch } from 'react-router-dom'
+import { Route, Link, Switch, withRouter } from 'react-router-dom'
 import Login from './components/Login/Login'
 import Profile from './components/Profile/Profile'
 import PrivateRoute from './components/PrivateRoute/PrivateRoute'
+import { getToken } from './utils/axiosWithAuth'
 import './App.css';
 
 
 function App() {
-  
+  const signedIn = getToken()
   return (
     <div className="App" style={{ padding: 30 }}>
       <div>
-        <Link to='/'>Login</Link>
-        <Link to='/profile'>Profile</Link>
+        {!signedIn && <Link to='/'>Login</Link>}
+        {signedIn && <Link to='/profile'>Profile</Link>}
       </div>
       <Switch>
         <PrivateRoute exact path='/profile' component={Profile} />
         <Route exact path='/' component={Login} />
-        <Route component={Login} />
       </Switch>
     </div>
   );
 }
 
-export default App;
+export default withRouter(App);
